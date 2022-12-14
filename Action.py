@@ -34,8 +34,8 @@ class RobotAction:
     def __init__(self):
         self.map = Map("map.txt")
         self.actions = []
-        self.InitPositionRotation()
-    def InitPositionRotation(self):
+        self.__InitPositionRotation()
+    def __InitPositionRotation(self):
         self.rotation = choice(list(Rotation))
         while True:
             self.x = randint(0,len(self.map.matriceMap)-1)
@@ -50,47 +50,47 @@ class RobotAction:
     def MoveForward(self):
         if self.rotation == Rotation.E or self.rotation == Rotation.W:
             if (self.rotation == Rotation.E):
-                if self.IsPossibleToMoveHere(self.x,self.y+1):
-                    self.ChangePosition(self.x,self.y+1) 
+                if self.__IsPossibleToMoveHere(self.x,self.y+1):
+                    self.__ChangePosition(self.x,self.y+1) 
                 else:
                     print("Error")
             else:
-                if self.IsPossibleToMoveHere(self.x,self.y-1):
-                    self.ChangePosition(self.x,self.y-1)
+                if self.__IsPossibleToMoveHere(self.x,self.y-1):
+                    self.__ChangePosition(self.x,self.y-1)
                 else:
                     print("Error")
         else:
             if (self.rotation == Rotation.N):
-                if self.IsPossibleToMoveHere(self.x-1,self.y):
-                    self.ChangePosition(self.x-1,self.y)
+                if self.__IsPossibleToMoveHere(self.x-1,self.y):
+                    self.__ChangePosition(self.x-1,self.y)
                 else:
                     print("Error")
             else:
-                if self.IsPossibleToMoveHere(self.x+1,self.y):
-                    self.ChangePosition(self.x+1,self.y)
+                if self.__IsPossibleToMoveHere(self.x+1,self.y):
+                    self.__ChangePosition(self.x+1,self.y)
                 else:
                     print("Error")
     def MoveBackward(self):
         if self.rotation == Rotation.E or self.rotation == Rotation.W:
             if (self.rotation == Rotation.E):
-                if self.IsPossibleToMoveHere(self.x,self.y-1):
-                    self.ChangePosition(self.x,self.y-1) 
+                if self.__IsPossibleToMoveHere(self.x,self.y-1):
+                    self.__ChangePosition(self.x,self.y-1) 
                 else:
                     print("Error")
             else:
-                if self.IsPossibleToMoveHere(self.x,self.y+1):
-                    self.ChangePosition(self.x,self.y+1)
+                if self.__IsPossibleToMoveHere(self.x,self.y+1):
+                    self.__ChangePosition(self.x,self.y+1)
                 else:
                     print("Error")
         else:
             if (self.rotation == Rotation.N):
-                if self.IsPossibleToMoveHere(self.x+1,self.y):
-                    self.ChangePosition(self.x+1,self.y)
+                if self.__IsPossibleToMoveHere(self.x+1,self.y):
+                    self.__ChangePosition(self.x+1,self.y)
                 else:
                     print("Error")
             else:
-                if self.IsPossibleToMoveHere(self.x-1,self.y):
-                    self.ChangePosition(self.x-1,self.y)
+                if self.__IsPossibleToMoveHere(self.x-1,self.y):
+                    self.__ChangePosition(self.x-1,self.y)
                 else:
                     print("Error")
     def TurnLeft(self):
@@ -99,14 +99,14 @@ class RobotAction:
     def TurnRight(self):
         self.rotation = Rotation.GetRotation(self.rotation,1)
         print(f"\nRotation = {self.rotation}")
-    def IsPossibleToMoveHere(self,x,y):
+    def __IsPossibleToMoveHere(self,x,y):
         if x>=0 and x < len(self.map.matriceMap) and y>=0 and y < len(self.map.matriceMap[0]):
             if self.map.matriceMap[x][y] != "X":
                 return True
         return False
     def AddAction(self,action):
         self.actions.append(action)
-    def ChangePosition(self,x,y):
+    def __ChangePosition(self,x,y):
         self.map.matriceMap[self.x][self.y] = self.oldCase
         self.x = x
         self.y = y
