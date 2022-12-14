@@ -117,6 +117,8 @@ class RobotAction:
         for action in self.actions:
             print("\n"+action.__name__)
             action(self)
+    def Info(self):
+        print(f"\nRotation = {self.rotation} ; x = {self.x} ; y = {self.y}")
 
 Robot = RobotAction()
 Robot.AddAction(RobotAction.MoveForward)
